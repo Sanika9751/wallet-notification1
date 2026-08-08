@@ -13,7 +13,6 @@ public class NotificationController {
 
     public NotificationController(
             NotificationService notificationService) {
-
         this.notificationService = notificationService;
     }
 
