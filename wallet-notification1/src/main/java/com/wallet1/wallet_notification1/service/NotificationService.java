@@ -14,9 +14,13 @@ public class NotificationService {
 
     public Notification getLatestNotification() {
 
+        if (latestNotification == null) {
+            return null;
+        }
+
         Notification notification = latestNotification;
 
-        // Clear notification after sending it once
+        // Clear after sending once
         latestNotification = null;
 
         return notification;
