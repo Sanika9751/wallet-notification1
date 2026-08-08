@@ -13,6 +13,12 @@ public class NotificationService {
     }
 
     public Notification getLatestNotification() {
-        return latestNotification;
+
+        Notification notification = latestNotification;
+
+        // Clear notification after sending it once
+        latestNotification = null;
+
+        return notification;
     }
 }
