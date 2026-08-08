@@ -4,6 +4,7 @@ import com.wallet1.wallet_notification1.service.NotificationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/webhook")
 public class WebhookController {

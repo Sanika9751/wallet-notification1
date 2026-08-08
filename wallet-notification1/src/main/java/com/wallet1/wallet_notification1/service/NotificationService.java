@@ -8,7 +8,8 @@ import java.util.List;
 @Service
 public class NotificationService {
 
-    private final List<String> notifications = new ArrayList<>();
+    private final List<String> notifications =
+            new ArrayList<>();
 
     public void sendNotification(String message) {
 
