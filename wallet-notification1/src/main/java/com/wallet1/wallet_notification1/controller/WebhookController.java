@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.*;
 public class WebhookController {
 
     private final NotificationService notificationService;
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper =
+            new ObjectMapper();
 
     public WebhookController(
             NotificationService notificationService) {
 
-        this.notificationService = notificationService;
+        this.notificationService =
+                notificationService;
     }
 
     @PostMapping("/transactions")
@@ -27,7 +29,8 @@ public class WebhookController {
 
         try {
 
-            JsonNode root = objectMapper.readTree(payload);
+            JsonNode root =
+                    objectMapper.readTree(payload);
 
             JsonNode activity =
                     root.path("event")
@@ -36,13 +39,19 @@ public class WebhookController {
 
             if (activity != null) {
 
-                String from =
+                String fromAddress =
                         activity.path("fromAddress")
                                 .asText();
 
-                String to =
+                String toAddress =
                         activity.path("toAddress")
                                 .asText();
+
+                String from =
+                        getWalletName(fromAddress);
+
+                String to =
+                        getWalletName(toAddress);
 
                 String asset =
                         activity.path("asset")
@@ -60,12 +69,11 @@ public class WebhookController {
                                 amount
                         );
 
-                notificationService.addNotification(
-                        notification
-                );
+                notificationService
+                        .addNotification(notification);
 
                 System.out.println(
-                        "Latest Transaction Stored"
+                        "Transaction Stored Successfully"
                 );
             }
 
@@ -74,5 +82,22 @@ public class WebhookController {
         }
 
         return ResponseEntity.ok("Success");
+    }
+
+    private String getWalletName(String address) {
+
+        if ("0x59f14b4121a99eb4e151d1748adf3fd402875a12"
+                .equalsIgnoreCase(address)) {
+
+            return "Sender Wallet";
+        }
+
+        if ("0x7c6bf83c2fd6eee36fc2df3639a0be4f9dc90225"
+                .equalsIgnoreCase(address)) {
+
+            return "Sanika Wallet";
+        }
+
+        return address;
     }
 }
