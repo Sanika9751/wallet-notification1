@@ -13,15 +13,12 @@ import org.springframework.web.bind.annotation.*;
 public class WebhookController {
 
     private final NotificationService notificationService;
-
-    private final ObjectMapper objectMapper =
-            new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public WebhookController(
             NotificationService notificationService) {
 
-        this.notificationService =
-                notificationService;
+        this.notificationService = notificationService;
     }
 
     @PostMapping("/transactions")
@@ -30,8 +27,7 @@ public class WebhookController {
 
         try {
 
-            JsonNode root =
-                    objectMapper.readTree(payload);
+            JsonNode root = objectMapper.readTree(payload);
 
             JsonNode activity =
                     root.path("event")
@@ -64,16 +60,16 @@ public class WebhookController {
                                 amount
                         );
 
-                notificationService
-                        .addNotification(notification);
+                notificationService.addNotification(
+                        notification
+                );
 
                 System.out.println(
-                        "Transaction Stored"
+                        "Latest Transaction Stored"
                 );
             }
 
         } catch (Exception e) {
-
             e.printStackTrace();
         }
 

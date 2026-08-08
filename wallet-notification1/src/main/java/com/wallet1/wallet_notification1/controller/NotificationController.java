@@ -4,8 +4,6 @@ import com.wallet1.wallet_notification1.model.Notification;
 import com.wallet1.wallet_notification1.service.NotificationService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/notifications")
@@ -16,13 +14,11 @@ public class NotificationController {
     public NotificationController(
             NotificationService notificationService) {
 
-        this.notificationService =
-                notificationService;
+        this.notificationService = notificationService;
     }
 
     @GetMapping
-    public List<Notification> getNotifications() {
-
-        return notificationService.getNotifications();
+    public Notification getNotification() {
+        return notificationService.getLatestNotification();
     }
 }
