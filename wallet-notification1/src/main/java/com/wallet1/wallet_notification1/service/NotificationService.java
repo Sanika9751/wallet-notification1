@@ -1,5 +1,6 @@
 package com.wallet1.wallet_notification1.service;
 
+import com.wallet1.wallet_notification1.model.Notification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,20 +9,16 @@ import java.util.List;
 @Service
 public class NotificationService {
 
-    private final List<String> notifications =
+    private final List<Notification> notifications =
             new ArrayList<>();
 
-    public void sendNotification(String message) {
+    public void addNotification(
+            Notification notification) {
 
-        notifications.add(message);
-
-        System.out.println("================================");
-        System.out.println("NOTIFICATION");
-        System.out.println(message);
-        System.out.println("================================");
+        notifications.add(notification);
     }
 
-    public List<String> getNotifications() {
+    public List<Notification> getNotifications() {
         return notifications;
     }
 }
