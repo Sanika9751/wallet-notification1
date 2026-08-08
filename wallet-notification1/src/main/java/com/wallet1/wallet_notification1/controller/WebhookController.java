@@ -86,16 +86,16 @@ public class WebhookController {
 
     private String getWalletName(String address) {
 
-        if ("0x59f14b4121a99eb4e151d1748adf3fd402875a12"
-                .equalsIgnoreCase(address)) {
-
-            return "Sender Wallet";
-        }
-
         if ("0x7c6bf83c2fd6eee36fc2df3639a0be4f9dc90225"
                 .equalsIgnoreCase(address)) {
 
-            return "Sanika Wallet";
+            return "Admin";
+        }
+
+        if ("0x59f14b4121a99eb4e151d1748adf3fd402875a12"
+                .equalsIgnoreCase(address)) {
+
+            return "DeploymentAdmin";
         }
 
         return address;
